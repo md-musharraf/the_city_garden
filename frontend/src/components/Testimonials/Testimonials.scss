@@ -1,0 +1,85 @@
+@use '../../styles/variables' as *;
+
+.testi {
+  max-width: 900px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  &__track {
+    display: flex;
+    transition: transform .5s cubic-bezier(.4,0,.2,1);
+  }
+
+  &__slide {
+    min-width: 100%;
+    padding: 0 20px;
+  }
+
+  &__card {
+    background: rgba($white,.06);
+    border: 1px solid rgba($gold,.18);
+    border-radius: 10px;
+    padding: 40px 36px;
+    text-align: center;
+    position: relative;
+
+    &::before {
+      content: '"';
+      position: absolute;
+      top: 18px; left: 28px;
+      font-family: $font-serif;
+      font-size: 5rem;
+      color: rgba($gold,.15);
+      line-height: 1;
+    }
+  }
+
+  &__stars {
+    color: $gold;
+    font-size: 1rem;
+    margin-bottom: 16px;
+  }
+
+  &__text {
+    font-size: 1rem;
+    color: rgba($cream,.8);
+    line-height: 1.8;
+    font-weight: 300;
+    margin-bottom: 24px;
+  }
+
+  &__author {
+    font-weight: 600;
+    color: $cream;
+    font-size: .95rem;
+  }
+
+  &__event {
+    font-size: .78rem;
+    color: $gold;
+    font-weight: 500;
+    margin-top: 3px;
+  }
+
+  &__dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 28px;
+  }
+
+  &__dot {
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: rgba($gold,.3);
+    cursor: pointer;
+    transition: all .3s;
+    border: none;
+
+    &--active {
+      background: $gold;
+      width: 24px;
+      border-radius: 4px;
+    }
+  }
+}

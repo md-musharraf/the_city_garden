@@ -1,0 +1,403 @@
+:root {
+  --bg-color: #fbf7ef;
+  --sec-bg-color: #173d36;
+  --text-color: #17312d;
+  --text-white: #fbf7ef;
+  --highlight: #c99631;
+  --highlight-text: #0f241f;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: linear-gradient(180deg, var(--bg-color) 0%, #efe4d2 100%);
+  color: var(--text-color);
+  min-height: 100vh;
+  width: 100%;
+  font-family: "Segoe UI", sans-serif;
+}
+
+.app {
+  height: 100%;
+  width: 100%;
+}
+
+/* Navbar */
+.nav {
+  height: 60px;
+  width: 100%;
+  background-color: var(--sec-bg-color);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+  color: var(--text-white);
+}
+.nav .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.nav .logo h1 {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+.nav .three-outline {
+  border: none;
+  background: none;
+  color: var(--text-white);
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.nav .nav-menu {
+  display: none;
+}
+
+/* Sidebar */
+.sidebar {
+  position: absolute;
+  z-index: 200;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 250px;
+  background-color: var(--sec-bg-color);
+  color: var(--text-white);
+  padding: 1rem;
+  display: block;
+  transition: transform 0.3s ease;
+}
+.sidebar .close-btn {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  border: none;
+  background: none;
+  color: red;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+.sidebar .sidebar-content {
+  margin-top: 2rem;
+  margin-left: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  list-style: none;
+  font-weight: 600;
+}
+
+.sidebar-close {
+  display: none;
+}
+
+/* Links */
+.nav-link {
+  text-decoration: none;
+  color: var(--text-white);
+  display: block;
+  transition: color 0.3s ease;
+}
+.nav-link:hover, .nav-link.active {
+  color: var(--highlight);
+}
+.nav-link.active {
+  text-decoration: underline;
+  text-underline-offset: 0.5rem;
+}
+
+/* Button */
+.book-btn {
+  background-color: red;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.book-btn:hover {
+  background-color: var(--highlight);
+  color: black;
+}
+
+/* Page */
+.home-page {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Highlight */
+.highlight {
+  height: 40px;
+  width: 100%;
+  background-color: var(--highlight);
+  color: var(--highlight-text);
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.highlight-content {
+  background: none;
+  border: none;
+}
+.highlight-text {
+  display: none;
+}
+
+/* Hero */
+.hero-section {
+  height: 100%;
+  width: 100%;
+}
+.hero-section .hero-bg-image {
+  height: 80vh;
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  opacity: 0.8;
+  position: relative;
+}
+.hero-section .hero-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+.hero-section .hero-container .hero-title {
+  border: 2px solid var(--highlight);
+  margin: auto;
+  background: rgba(189, 171, 67, 0.456);
+  border-radius: 2rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.hero-section .hero-container .hero-header {
+  font-size: 2rem;
+  color: white;
+}
+.hero-section .hero-container .hero-header-style {
+  color: var(--highlight);
+}
+.hero-section .hero-container .hero-text {
+  color: var(--bg-color);
+  font-weight: 600;
+}
+.hero-section .hero-container .hero-btns {
+  padding-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+}
+.hero-section .hero-container .hero-btns .check-ability-btn {
+  background-color: var(--highlight);
+  border: none;
+  color: var(--highlight-text);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+.hero-section .hero-container .hero-btns .book-now-btn-hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  background: none;
+  border: 1px solid white;
+  color: white;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* About */
+.about {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  padding: 4rem 1rem;
+  gap: 4rem;
+}
+.about-image {
+  width: 100%;
+  height: 40vh;
+  position: relative;
+}
+.about-image img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  border-radius: 1rem;
+}
+.about-box {
+  position: absolute;
+  z-index: 10;
+  background: var(--highlight);
+  right: 0;
+  bottom: -5%;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  align-items: center;
+  border-radius: 1rem;
+}
+.about-text-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.about-text-container .about-highlight {
+  color: var(--highlight);
+  font-weight: 600;
+  font-size: 0.8rem;
+}
+.about-text-container .about-heading {
+  font-size: 2rem;
+}
+.about-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.about-feature {
+  display: flex;
+  gap: 0.5rem;
+}
+.about-feature span {
+  color: var(--highlight);
+}
+.about-btn {
+  margin-top: 1rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  background-color: var(--highlight);
+  border: none;
+  color: var(--highlight-text);
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-weight: 500;
+}
+
+/* Tablet */
+@media (min-width: 768px) {
+  .nav {
+    padding: 1.5rem 3rem;
+  }
+  .nav .three-outline {
+    display: none;
+  }
+  .nav .nav-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-weight: 600;
+  }
+  .highlight {
+    justify-content: space-evenly;
+    height: 50px;
+    font-size: 1rem;
+  }
+  .highlight-content {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .highlight-text {
+    display: block;
+  }
+  .hero-container {
+    top: 60%;
+  }
+  .hero-container .hero-header {
+    font-size: 4rem;
+  }
+  .hero-bg-image {
+    height: 90vh;
+  }
+  .hero-btns {
+    flex-direction: row;
+  }
+}
+/* Laptop */
+@media (min-width: 1024px) {
+  body {
+    font-size: 18px;
+  }
+  body .about {
+    padding: 3rem 1rem;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    margin: auto;
+    height: 90vh;
+    gap: 3rem;
+    flex-direction: row;
+  }
+  body .about-image {
+    width: 45%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  body .about-image img {
+    width: 100%;
+    height: 100%;
+  }
+  body .about .about-text-container {
+    width: 45%;
+    height: 100%;
+  }
+  body .about .about-text-container .about-highlight {
+    font-size: 1rem;
+  }
+  body .about .about-text-container .about-heading {
+    font-size: 2.5rem;
+    width: 100%;
+  }
+  body .about .about-text-container .about-text {
+    font-size: 1.2rem;
+  }
+  body .about .about-text-container .about-features {
+    font-size: 1.1rem;
+  }
+}
+/* Desktop */
+@media (min-width: 1280px) {
+  body {
+    font-size: 20px;
+  }
+}/*# sourceMappingURL=App.css.map */

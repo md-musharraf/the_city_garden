@@ -1,0 +1,84 @@
+@use '../../styles/variables' as *;
+
+.footer {
+  background: $footer-bg;
+  padding: 60px 24px 28px;
+  color: rgba($cream,.6);
+
+  &__top {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    gap: 40px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba($white,.07);
+
+    @media (max-width: $bp-md)  { grid-template-columns: 1fr 1fr; }
+    @media (max-width: $bp-sm)  { grid-template-columns: 1fr; }
+  }
+
+  &__brand {
+    p {
+      font-size: .83rem;
+      line-height: 1.75;
+      max-width: 260px;
+    }
+  }
+
+  &__logo {
+    font-family: $font-serif;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: $cream;
+    text-decoration: none;
+    display: block;
+    margin-bottom: 14px;
+
+    span { color: $gold; }
+  }
+
+  &__col {
+    h4 {
+      color: $cream;
+      font-family: $font-sans;
+      font-size: .85rem;
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      li a, li span {
+        color: rgba($cream,.55);
+        text-decoration: none;
+        font-size: .83rem;
+        transition: color .2s;
+        cursor: pointer;
+
+        &:hover { color: $gold; }
+      }
+    }
+  }
+
+  &__bottom {
+    max-width: 1100px;
+    margin: 24px auto 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+    font-size: .78rem;
+
+    @media (max-width: $bp-sm) { flex-direction: column; text-align: center; }
+  }
+
+  &__heart { color: $gold; }
+}

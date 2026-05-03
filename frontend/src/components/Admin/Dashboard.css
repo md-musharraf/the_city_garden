@@ -1,0 +1,325 @@
+.admin-dashboard {
+  max-width: 1000px;
+  margin: 60px auto 40px;
+  padding: 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(201, 150, 49, 0.3);
+  border-radius: 10px;
+  color: #e8dcc4;
+}
+.admin-dashboard h2 {
+  font-size: 2.2rem;
+  margin-bottom: 35px;
+  text-align: center;
+  color: #c99631;
+  font-weight: 700;
+}
+
+.admin-dashboard__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.admin-dashboard__logout {
+  border: 1px solid rgba(201, 150, 49, 0.4);
+  background: rgba(255, 255, 255, 0.08);
+  color: #efe1c7;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+}
+.admin-dashboard__logout:hover {
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.admin-section {
+  margin-bottom: 30px;
+  padding: 25px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(201, 150, 49, 0.15);
+  border-radius: 8px;
+}
+.admin-section h3 {
+  font-size: 1.25rem;
+  margin-bottom: 18px;
+  color: #c99631;
+  font-weight: 600;
+}
+.admin-section form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.admin-section input,
+.admin-section select {
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(201, 150, 49, 0.4);
+  border-radius: 6px;
+  color: #e8dcc4;
+  font-family: inherit;
+  font-size: 0.95rem;
+  transition: all 0.3s;
+}
+.admin-section input::-moz-placeholder, .admin-section select::-moz-placeholder {
+  color: rgba(232, 220, 196, 0.5);
+}
+.admin-section input::placeholder,
+.admin-section select::placeholder {
+  color: rgba(232, 220, 196, 0.5);
+}
+.admin-section input:focus,
+.admin-section select:focus {
+  outline: none;
+  border-color: #c99631;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow: 0 0 8px rgba(201, 150, 49, 0.2);
+}
+.admin-section button {
+  padding: 12px 20px;
+  background: #c99631;
+  color: #1a1a1a;
+  border: none;
+  border-radius: 6px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.admin-section button:hover {
+  background: #e2c06c;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(201, 150, 49, 0.4);
+}
+.admin-section button:active {
+  transform: translateY(0);
+}
+
+.upload-form .file-input-wrapper {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+.upload-form .file-input {
+  display: none;
+}
+.upload-form .file-label {
+  display: block;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 2px dashed rgba(201, 150, 49, 0.4);
+  border-radius: 6px;
+  color: #e8dcc4;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.upload-form .file-label:hover {
+  border-color: #c99631;
+  background: rgba(201, 150, 49, 0.1);
+}
+.upload-form .preview {
+  margin: 12px 0;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(201, 150, 49, 0.3);
+}
+.upload-form .preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+  max-height: 300px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.calendar-wrapper {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid rgba(201, 150, 49, 0.2);
+}
+
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+.calendar-header h4 {
+  font-size: 1.1rem;
+  color: #c99631;
+  margin: 0;
+}
+.calendar-header button {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: rgba(201, 150, 49, 0.2);
+  border: 1px solid rgba(201, 150, 49, 0.4);
+  border-radius: 4px;
+  color: #c99631;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+.calendar-header button:hover {
+  background: rgba(201, 150, 49, 0.4);
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 8px;
+  margin-bottom: 16px;
+}
+
+.calendar-day-header {
+  text-align: center;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #a89968;
+  padding: 8px 0;
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  padding: 0;
+  background: rgba(80, 160, 100, 0.15);
+  border: 1px solid rgba(80, 160, 100, 0.3);
+  border-radius: 6px;
+  color: #9dd3ac;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+.calendar-day:hover {
+  background: rgba(80, 160, 100, 0.25);
+  transform: scale(1.05);
+}
+.calendar-day.booked {
+  background: rgba(180, 60, 60, 0.25);
+  border-color: rgba(180, 60, 60, 0.5);
+  color: #e07070;
+}
+.calendar-day.booked:hover {
+  background: rgba(180, 60, 60, 0.35);
+}
+
+.empty {
+  pointer-events: none;
+}
+
+.calendar-legend {
+  display: flex;
+  gap: 20px;
+  font-size: 0.9rem;
+  color: rgba(232, 220, 196, 0.8);
+}
+.calendar-legend > div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-available {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: rgba(80, 160, 100, 0.6);
+  border-radius: 3px;
+}
+
+.legend-booked {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  background: rgba(180, 60, 60, 0.6);
+  border-radius: 3px;
+}
+
+.booked-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.booked-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 14px;
+  background: rgba(180, 60, 60, 0.1);
+  border: 1px solid rgba(180, 60, 60, 0.3);
+  border-radius: 6px;
+}
+.booked-item .date {
+  font-weight: 600;
+  color: #e07070;
+}
+.booked-item .event {
+  color: rgba(224, 112, 112, 0.8);
+  font-size: 0.9rem;
+}
+
+.no-data {
+  text-align: center;
+  color: rgba(232, 220, 196, 0.5);
+  font-style: italic;
+  padding: 20px;
+}
+
+.admin-msg {
+  margin-top: 24px;
+  padding: 16px 18px;
+  border-radius: 6px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  animation: slideIn 0.3s ease;
+}
+.admin-msg.success {
+  background: rgba(80, 160, 100, 0.2);
+  border: 1px solid rgba(80, 160, 100, 0.5);
+  color: #7dd3ac;
+}
+.admin-msg.error {
+  background: rgba(180, 60, 60, 0.2);
+  border: 1px solid rgba(180, 60, 60, 0.5);
+  color: #e07070;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@media (max-width: 768px) {
+  .admin-dashboard {
+    margin: 40px 15px;
+    padding: 25px;
+  }
+  .admin-section {
+    padding: 18px;
+  }
+  .calendar-grid {
+    gap: 6px;
+  }
+  .calendar-legend {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  .booked-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+  }
+}/*# sourceMappingURL=Dashboard.css.map */

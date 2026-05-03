@@ -1,0 +1,35 @@
+@use '../../styles/variables' as *;
+
+.info-bar {
+  background: $gold;
+  padding: 10px 24px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
+  flex-wrap: wrap;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: .82rem;
+    font-weight: 600;
+    color: $dark-bg;
+    text-decoration: none;
+    transition: opacity .2s;
+    cursor: pointer;
+    background: none;
+    border: none;
+
+    &:hover { opacity: .75; }
+
+    svg { font-size: .9rem; }
+  }
+
+  &__text {
+    @media (max-width: $bp-sm) { display: none; }
+  }
+
+  @media (max-width: $bp-sm) { gap: 16px; }
+}

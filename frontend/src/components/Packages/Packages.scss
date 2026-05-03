@@ -1,0 +1,121 @@
+@use '../../styles/variables' as *;
+
+.packages {
+  &__grid {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3,1fr);
+    gap: 24px;
+
+    @media (max-width: $bp-md) {
+      grid-template-columns: 1fr;
+      max-width: 380px;
+    }
+  }
+
+  &__card {
+    background: $white;
+    border-radius: 10px;
+    padding: 40px 28px;
+    text-align: center;
+    position: relative;
+    transition: all .35s;
+    border: 2px solid transparent;
+    box-shadow: 0 4px 24px rgba($forest,.08);
+
+    &:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba($forest,.15); }
+
+    &--featured {
+      background: $forest;
+      border-color: $gold;
+      transform: scale(1.04);
+
+      &:hover { transform: scale(1.04) translateY(-8px); }
+
+      .packages__name,
+      .packages__features li { color: rgba($cream,.8); }
+      .packages__price { color: $gold; }
+      .packages__per   { color: rgba($cream,.55); }
+    }
+  }
+
+  &__badge {
+    position: absolute;
+    top: -14px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: $gold;
+    color: $dark-bg;
+    padding: 4px 16px;
+    border-radius: 20px;
+    font-size: .72rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  &__name {
+    font-family: $font-serif;
+    font-size: 1.3rem;
+    color: $forest;
+    margin-bottom: 6px;
+  }
+
+  &__price {
+    font-size: 2.2rem;
+    font-weight: 700;
+    font-family: $font-serif;
+    color: $forest;
+    margin-bottom: 4px;
+  }
+
+  &__per {
+    font-size: .78rem;
+    color: $text-mid;
+    margin-bottom: 24px;
+  }
+
+  &__features {
+    list-style: none;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    text-align: left;
+
+    li {
+      font-size: .85rem;
+      color: $text-mid;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  }
+
+  &__check { color: $gold; font-size: .8rem; flex-shrink: 0; }
+  &__cross  { color: #c77;  font-size: .8rem; flex-shrink: 0; }
+
+  &__btn {
+    display: block;
+    padding: 12px 28px;
+    border-radius: 5px;
+    font-size: .88rem;
+    font-weight: 600;
+    letter-spacing: .5px;
+    transition: all .3s;
+    background: $forest;
+    color: $cream;
+    text-decoration: none;
+
+    &:hover { background: $forest-light; }
+
+    .packages__card--featured & {
+      background: $gold;
+      color: $dark-bg;
+
+      &:hover { background: $gold-light; }
+    }
+  }
+}

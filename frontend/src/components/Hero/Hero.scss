@@ -1,0 +1,127 @@
+@use "../../styles/variables" as *;
+
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(
+      160deg,
+      rgba(20, 40, 40, 0.72) 0%,
+      rgba(30, 51, 51, 0.55) 60%,
+      rgba(47, 79, 79, 0.45) 100%
+    ),
+    url("https://images.unsplash.com/photo-1587271407850-8d438ca9fdf2?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D")
+      center / cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 80px 24px;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at 60% 80%, rgba($gold, 0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  &__content {
+    max-width: 800px;
+    position: relative;
+    z-index: 1;
+  }
+
+  &__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba($gold, 0.18);
+    border: 1px solid rgba($gold, 0.45);
+    color: $gold-light;
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    margin-bottom: 24px;
+    backdrop-filter: blur(8px);
+  }
+
+  &__heading {
+    font-size: clamp(2.2rem, 5.5vw, 4rem);
+    color: $cream;
+    line-height: 1.2;
+    margin-bottom: 18px;
+    font-weight: 700;
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
+
+    em {
+      color: $gold;
+      font-style: normal;
+    }
+  }
+
+  &__sub {
+    font-size: clamp(1rem, 2.2vw, 1.2rem);
+    color: rgba($cream, 0.82);
+    margin-bottom: 40px;
+    font-weight: 300;
+    line-height: 1.7;
+  }
+
+  &__btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  &__scroll {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: rgba($cream, 0.5);
+    font-size: 0.72rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+  }
+
+  &__scroll-dot {
+    width: 22px;
+    height: 36px;
+    border: 2px solid rgba($cream, 0.3);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    padding-top: 6px;
+
+    &::after {
+      content: "";
+      width: 5px;
+      height: 10px;
+      background: $gold;
+      border-radius: 3px;
+      animation: scrollAnim 1.8s infinite;
+    }
+  }
+}
+
+@keyframes scrollAnim {
+  0%,
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  80% {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+}
