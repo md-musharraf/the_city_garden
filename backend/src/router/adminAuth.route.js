@@ -1,34 +1,47 @@
 const express = require("express");
-const { ADMIN_PHONE, ADMIN_PASSWORD, ADMIN_TOKEN } = require("../config/admin.credentials");
-
+const adminAuthModel = require("../models/adminAuth.model");
+const { ADMIN_TOKEN } = require("../config/admin.credentials");
 const router = express.Router();
 
-router.post("/admin/login", (req, res) => {
+// POST /api/admin/register — create a new admin
+router.post("/admin/register", async (req, res) => {
+  const { phone, password } = req.body;
+
+  const admin = new adminAuthModel({ phone, password });
+  await admin.save();
+
+  res.json({ message: "Admin created successfully" });
+});
+
+// POST /api/admin/login
+router.post("/admin/login", async (req, res) => {
   const { phone, password } = req.body;
 
   if (!phone || !password) {
-    return res.status(400).json({ message: "phone and password required" });
+    return res.status(400).json({ message: "Phone and password are required" });
   }
 
-  if (phone !== ADMIN_PHONE || password !== ADMIN_PASSWORD) {
-    return res.status(401).json({ message: "Invalid credentials" });
+  try {
+    const admin = await adminAuthModel.findOne({ phone });
+
+    if (!admin) {
+      return res.status(404).json({ message: "Admin not found" });
+    }
+
+    if (admin.password !== password) {
+      return res.status(401).json({ message: "Invalid password" });
+    }
+
+    // Return the static admin token so frontend can authorize dashboard requests
+    res.json({
+      message: "Admin logged in successfully",
+      admin,
+      token: ADMIN_TOKEN,
+    });
+  } catch (err) {
+    console.error("Login error:", err);
+    res.status(500).json({ message: "Server error during login" });
   }
-
-  return res.json({
-    message: "Login successful",
-    token: ADMIN_TOKEN,
-  });
-});
-
-router.post("/admin/verify", (req, res) => {
-  const authHeader = req.headers.authorization || "";
-  const token = authHeader.startsWith("Bearer ") ? authHeader.slice(7) : "";
-
-  if (!token || token !== ADMIN_TOKEN) {
-    return res.status(401).json({ message: "Unauthorized" });
-  }
-
-  return res.json({ message: "Authorized" });
 });
 
 module.exports = router;
