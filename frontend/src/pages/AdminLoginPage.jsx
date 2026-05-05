@@ -3,14 +3,12 @@ import { useNavigate } from "react-router-dom";
 import axios from "../axios/config";
 import "./AdminLoginPage.scss";
 
-const DEMO_PHONE = "6299019431";
-const DEMO_PASSWORD = "Musharraf@786";
-
 const AdminLoginPage = () => {
   const navigate = useNavigate();
-  const [phone, setPhone] = useState(DEMO_PHONE);
-  const [password, setPassword] = useState(DEMO_PASSWORD);
+  const [phone, setPhone] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+
 
   const handleLogin = async (e) => {
     e.preventDefault();

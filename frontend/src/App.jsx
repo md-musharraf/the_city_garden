@@ -6,6 +6,8 @@ import AppRoutes from "./routes/Routes";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
+const ADMIN_ROUTES = ["/admin", "/admin-login"];
+
 const ScrollToAnchor = () => {
   const location = useLocation();
 
@@ -28,22 +30,26 @@ const ScrollToAnchor = () => {
   return null;
 };
 
-const App = () => (
-  <div className="app">
-    {/* Fixed navigation — always visible */}
-    <Navbar />
-    <ScrollToAnchor />
+const App = () => {
+  const location = useLocation();
+  const isAdminRoute = ADMIN_ROUTES.some((r) =>
+    location.pathname.startsWith(r)
+  );
 
-    {/* Offset for the 70px fixed header */}
-    <main style={{ paddingTop: "70px" }}>
-      <AppRoutes />
-    </main>
+  return (
+    <div className="app">
+      {!isAdminRoute && <Navbar />}
+      <ScrollToAnchor />
 
-    <Footer />
+      <main style={isAdminRoute ? {} : { paddingTop: "70px" }}>
+        <AppRoutes />
+      </main>
 
-    {/* Floating WhatsApp & Book Now buttons */}
-    <FloatingButtons />
-  </div>
-);
+      {!isAdminRoute && <Footer />}
+      {!isAdminRoute && <FloatingButtons />}
+    </div>
+  );
+};
 
 export default App;
+

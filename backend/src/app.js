@@ -8,16 +8,42 @@ const cors = require("cors");
 app.use(
   cors({
     credentials: true,
-    origin: ["http://10.136.153.47:5173", "http://localhost:5173"],
+    origin: function (origin, callback) {
+      // Allow requests with no origin (Postman, server-to-server)
+      if (!origin) return callback(null, true);
+
+      const allowed = ["https://the-city-garden.vercel.app"];
+
+      // Allow any Vercel preview URL for this project
+      const isVercelPreview =
+        /^https:\/\/the-city-garden.*\.vercel\.app$/.test(origin);
+      // Allow localhost on any port for local dev
+      const isLocalhost = /^http:\/\/localhost:\d+$/.test(origin);
+      const isLocalIP = /^http:\/\/10\.\d+\.\d+\.\d+:\d+$/.test(origin);
+
+      if (
+        allowed.includes(origin) ||
+        isVercelPreview ||
+        isLocalhost ||
+        isLocalIP
+      ) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS: " + origin));
+      }
+    },
   }),
 );
-// const multer = require("multer");
 
 // Middleware to parse JSON bodies
 app.use(express.json());
+
+// Health check — keeps Render awake & lets you verify the backend is running
+app.get("/health", (req, res) => res.json({ status: "ok" }));
+
 app.use("/api", imageRouter);
 app.use("/api", bookingRouter);
 app.use("/api", adminRouter);
-// app.use(multer());
 
 module.exports = app;
+
