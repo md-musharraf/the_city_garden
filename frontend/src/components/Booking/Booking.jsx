@@ -158,11 +158,13 @@ const Booking = () => {
   const ref = useRef(null);
   const [bookingMsg, setBookingMsg] = useState("");
   const [bookingError, setBookingError] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const {
     register,
     handleSubmit,
     setValue,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -176,27 +178,43 @@ const Booking = () => {
   }, []);
 
   const onSubmit = async (data) => {
-    console.log(data);
     setBookingError("");
     setBookingMsg("");
-
-    try {
-      const res = await axios.post("/api/book", data);
-      console.log("Booking saved:", res.data);
-      setBookingMsg("Booking saved successfully!");
-    } catch (err) {
-      console.error("Booking error:", err);
-      setBookingError(err.response?.data?.message || "Failed to save booking");
-    }
+    setIsSubmitting(true);
 
     const { name, phone, event, date, guests, message } = data;
+
+    // ✅ Build WhatsApp message
     const text =
       `🌿 *THE CITY GARDEN Booking Request*\n\n` +
       `👤 Name: ${name}\n📞 Phone: ${phone}\n🎉 Event: ${event}\n` +
       `📅 Date: ${date}\n👥 Guests: ${guests}` +
       (message ? `\n💬 Message: ${message}` : "") +
       `\n\nPlease confirm availability.`;
-    window.open(`https://wa.me/918084737646?text=${encodeURIComponent(text)}`, "_blank");
+
+    // ✅ Open WhatsApp IMMEDIATELY while still in the user-click context
+    // (browsers block window.open after any await/async gap)
+    window.open(
+      `https://wa.me/919934080104?text=${encodeURIComponent(text)}`,
+      "_blank",
+    );
+
+    // ✅ Save to backend in background — API failure does NOT block WhatsApp
+    try {
+      await axios.post("/api/book", data);
+      setBookingMsg("Booking request sent via WhatsApp & saved successfully!");
+      reset();
+    } catch (err) {
+      // WhatsApp already opened — just show a non-blocking note
+      const msg = err.response?.data?.message || "";
+      if (msg === "Date already booked") {
+        setBookingError("⚠️ That date is already booked. Your WhatsApp message was still sent.");
+      } else {
+        setBookingError("WhatsApp opened! (Note: booking record could not be saved — " + (msg || "server error") + ")");
+      }
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -312,9 +330,12 @@ const Booking = () => {
           <button
             type="submit"
             className="booking__confirm-btn"
+            disabled={isSubmitting}
           >
-            <FaWhatsapp /> Confirm Booking via WhatsApp
+            <FaWhatsapp />
+            {isSubmitting ? " Sending…" : " Confirm Booking via WhatsApp"}
           </button>
+
         </form>
       </div>
     </section>
