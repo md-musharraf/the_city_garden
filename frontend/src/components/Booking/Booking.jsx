@@ -182,22 +182,20 @@ const Booking = () => {
     setBookingMsg("");
     setIsSubmitting(true);
 
-    const { name, phone, event, date, guests, message } = data;
+    const { name, phone, event, date, guests, message, stayRoom } = data;
 
     // ✅ Build WhatsApp message
     const text =
       `🌿 *THE CITY GARDEN Booking Request*\n\n` +
       `👤 Name: ${name}\n📞 Phone: ${phone}\n🎉 Event: ${event}\n` +
       `📅 Date: ${date}\n👥 Guests: ${guests}` +
+      `\n🛏️ Stay Room: ${stayRoom || "Not required"}` +
       (message ? `\n💬 Message: ${message}` : "") +
       `\n\nPlease confirm availability.`;
 
     // ✅ Open WhatsApp IMMEDIATELY while still in the user-click context
     // (browsers block window.open after any await/async gap)
-    window.open(
-      `https://wa.me/919934080104?text=${encodeURIComponent(text)}`,
-      "_blank",
-    );
+    window.open(`https://wa.me/919934080104?text=${encodeURIComponent(text)}`, "_blank");
 
     // ✅ Save to backend in background — API failure does NOT block WhatsApp
     try {
@@ -210,7 +208,11 @@ const Booking = () => {
       if (msg === "Date already booked") {
         setBookingError("⚠️ That date is already booked. Your WhatsApp message was still sent.");
       } else {
-        setBookingError("WhatsApp opened! (Note: booking record could not be saved — " + (msg || "server error") + ")");
+        setBookingError(
+          "WhatsApp opened! (Note: booking record could not be saved — " +
+            (msg || "server error") +
+            ")",
+        );
       }
     } finally {
       setIsSubmitting(false);
@@ -284,6 +286,7 @@ const Booking = () => {
                   "Birthday Party",
                   "Corporate Event",
                   "Cultural Program",
+                  "Stay Room(AC/Non-AC)",
                   "Other",
                 ].map((e) => (
                   <option key={e}>{e}</option>
@@ -310,11 +313,25 @@ const Booking = () => {
                 id="bGuests"
                 {...register("guests")}
               >
-                {["Up to 50", "50–150", "150–300", "300–500", "500+"].map((g) => (
-                  <option key={g}>{g}</option>
-                ))}
+                {["Single", "Double", "Up to 50", "50–150", "150–300", "300–500", "500+"].map(
+                  (g) => (
+                    <option key={g}>{g}</option>
+                  ),
+                )}
               </select>
             </div>
+          </div>
+
+          <div className="form-group">
+            <label htmlFor="bStayRoom">Stay Room</label>
+            <select
+              id="bStayRoom"
+              {...register("stayRoom")}
+            >
+              {["Not required", "AC Room", "Non-AC Room"].map((r) => (
+                <option key={r}>{r}</option>
+              ))}
+            </select>
           </div>
 
           <div className="form-group">
@@ -335,7 +352,6 @@ const Booking = () => {
             <FaWhatsapp />
             {isSubmitting ? " Sending…" : " Confirm Booking via WhatsApp"}
           </button>
-
         </form>
       </div>
     </section>

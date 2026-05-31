@@ -38,7 +38,7 @@ const About = () => {
       <div className="about__grid">
         <div className="about__img-wrap fade-up">
           <img
-            src="https://images.unsplash.com/photo-1707374661682-d804856cee22?q=80&w=1976&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            src="https://ik.imagekit.io/ts2hm0adf/the-city-garden/IMG-20260527-WA0034.jpg?updatedAt=1780237999486"
             alt="THE CITY GARDEN Venue"
           />
           <div className="about__badge">

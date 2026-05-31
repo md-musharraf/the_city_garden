@@ -14,7 +14,7 @@ router.post("/book", async (req, res) => {
   console.log("Booking request body:", req.body);
 
   try {
-    const { name, phone, event, date, guests, message } = req.body;
+    const { name, phone, event, date, guests, message, stayRoom } = req.body;
 
     if (!name || !phone || !event || !date) {
       return res.status(400).json({ message: "Missing required fields" });
@@ -42,6 +42,7 @@ router.post("/book", async (req, res) => {
       phone: phoneNum,
       event,
       eventDate: normalizedDate,
+      stayRoom: stayRoom || "Not required",
     });
 
     res.status(201).json({ message: "Booking created", booking });

@@ -2,16 +2,18 @@
   max-width: 1000px;
   margin: 60px auto 40px;
   padding: 40px;
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(201, 150, 49, 0.3);
+  width: 100%;
+  background: rgba(12, 18, 16, 0.92);
+  border: 1px solid rgba(63, 161, 120, 0.35);
   border-radius: 10px;
-  color: #e8dcc4;
+  color: #e7f2ec;
+  box-sizing: border-box;
 }
 .admin-dashboard h2 {
   font-size: 2.2rem;
   margin-bottom: 35px;
   text-align: center;
-  color: #c99631;
+  color: #66c19a;
   font-weight: 700;
 }
 
@@ -23,9 +25,9 @@
 }
 
 .admin-dashboard__logout {
-  border: 1px solid rgba(201, 150, 49, 0.4);
-  background: rgba(255, 255, 255, 0.08);
-  color: #efe1c7;
+  border: 1px solid rgba(102, 193, 154, 0.45);
+  background: rgba(255, 255, 255, 0.06);
+  color: #e7f2ec;
   border-radius: 6px;
   padding: 8px 12px;
   cursor: pointer;
@@ -37,14 +39,16 @@
 .admin-section {
   margin-bottom: 30px;
   padding: 25px;
-  background: rgba(0, 0, 0, 0.3);
-  border: 1px solid rgba(201, 150, 49, 0.15);
+  background: rgba(6, 12, 10, 0.7);
+  border: 1px solid rgba(63, 161, 120, 0.18);
   border-radius: 8px;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 .admin-section h3 {
   font-size: 1.25rem;
   margin-bottom: 18px;
-  color: #c99631;
+  color: #66c19a;
   font-weight: 600;
 }
 .admin-section form {
@@ -55,32 +59,32 @@
 .admin-section input,
 .admin-section select {
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(201, 150, 49, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(63, 161, 120, 0.35);
   border-radius: 6px;
-  color: #e8dcc4;
+  color: #e7f2ec;
   font-family: inherit;
   font-size: 0.95rem;
   transition: all 0.3s;
 }
 .admin-section input::-moz-placeholder, .admin-section select::-moz-placeholder {
-  color: rgba(232, 220, 196, 0.5);
+  color: rgba(231, 242, 236, 0.55);
 }
 .admin-section input::placeholder,
 .admin-section select::placeholder {
-  color: rgba(232, 220, 196, 0.5);
+  color: rgba(231, 242, 236, 0.55);
 }
 .admin-section input:focus,
 .admin-section select:focus {
   outline: none;
-  border-color: #c99631;
-  background: rgba(255, 255, 255, 0.12);
-  box-shadow: 0 0 8px rgba(201, 150, 49, 0.2);
+  border-color: #66c19a;
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: 0 0 8px rgba(102, 193, 154, 0.2);
 }
 .admin-section button {
   padding: 12px 20px;
-  background: #c99631;
-  color: #1a1a1a;
+  background: #3fa178;
+  color: #0b1712;
   border: none;
   border-radius: 6px;
   font-weight: 600;
@@ -89,9 +93,9 @@
   transition: all 0.3s;
 }
 .admin-section button:hover {
-  background: #e2c06c;
+  background: #57c79a;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(201, 150, 49, 0.4);
+  box-shadow: 0 6px 16px rgba(63, 161, 120, 0.35);
 }
 .admin-section button:active {
   transform: translateY(0);
@@ -108,23 +112,23 @@
 .upload-form .file-label {
   display: block;
   padding: 12px 14px;
-  background: rgba(255, 255, 255, 0.08);
-  border: 2px dashed rgba(201, 150, 49, 0.4);
+  background: rgba(255, 255, 255, 0.06);
+  border: 2px dashed rgba(63, 161, 120, 0.45);
   border-radius: 6px;
-  color: #e8dcc4;
+  color: #e7f2ec;
   text-align: center;
   cursor: pointer;
   transition: all 0.3s;
 }
 .upload-form .file-label:hover {
-  border-color: #c99631;
-  background: rgba(201, 150, 49, 0.1);
+  border-color: #66c19a;
+  background: rgba(63, 161, 120, 0.12);
 }
 .upload-form .preview {
   margin: 12px 0;
   border-radius: 8px;
   overflow: hidden;
-  border: 1px solid rgba(201, 150, 49, 0.3);
+  border: 1px solid rgba(63, 161, 120, 0.3);
 }
 .upload-form .preview img {
   width: 100%;
@@ -136,10 +140,13 @@
 }
 
 .calendar-wrapper {
-  background: rgba(0, 0, 0, 0.2);
+  background: rgba(10, 18, 14, 0.7);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid rgba(201, 150, 49, 0.2);
+  border: 1px solid rgba(63, 161, 120, 0.22);
+  overflow: hidden;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .calendar-header {
@@ -150,53 +157,59 @@
 }
 .calendar-header h4 {
   font-size: 1.1rem;
-  color: #c99631;
+  color: #66c19a;
   margin: 0;
 }
 .calendar-header button {
   width: 36px;
   height: 36px;
   padding: 0;
-  background: rgba(201, 150, 49, 0.2);
-  border: 1px solid rgba(201, 150, 49, 0.4);
+  background: rgba(63, 161, 120, 0.2);
+  border: 1px solid rgba(63, 161, 120, 0.4);
   border-radius: 4px;
-  color: #c99631;
+  color: #66c19a;
   cursor: pointer;
   font-size: 1rem;
   transition: all 0.2s;
 }
 .calendar-header button:hover {
-  background: rgba(201, 150, 49, 0.4);
+  background: rgba(63, 161, 120, 0.35);
 }
 
 .calendar-grid {
   display: grid;
-  grid-template-columns: repeat(7, 1fr);
+  grid-template-columns: repeat(7, minmax(0, 1fr));
   gap: 8px;
   margin-bottom: 16px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .calendar-day-header {
   text-align: center;
   font-size: 0.85rem;
   font-weight: 600;
-  color: #a89968;
+  color: rgba(231, 242, 236, 0.65);
   padding: 8px 0;
+  min-width: 0;
 }
 
 .calendar-day {
   aspect-ratio: 1;
   padding: 0;
-  background: rgba(80, 160, 100, 0.15);
-  border: 1px solid rgba(80, 160, 100, 0.3);
+  background: rgba(63, 161, 120, 0.18);
+  border: 1px solid rgba(63, 161, 120, 0.3);
   border-radius: 6px;
-  color: #9dd3ac;
+  color: #b7ead6;
   cursor: pointer;
   font-weight: 500;
   transition: all 0.2s;
+  width: 100%;
+  min-width: 0;
 }
 .calendar-day:hover {
-  background: rgba(80, 160, 100, 0.25);
+  background: rgba(63, 161, 120, 0.32);
   transform: scale(1.05);
 }
 .calendar-day.booked {
@@ -216,7 +229,7 @@
   display: flex;
   gap: 20px;
   font-size: 0.9rem;
-  color: rgba(232, 220, 196, 0.8);
+  color: rgba(231, 242, 236, 0.75);
 }
 .calendar-legend > div {
   display: flex;
@@ -228,7 +241,7 @@
   display: inline-block;
   width: 12px;
   height: 12px;
-  background: rgba(80, 160, 100, 0.6);
+  background: rgba(63, 161, 120, 0.6);
   border-radius: 3px;
 }
 
@@ -253,8 +266,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 12px 14px;
-  background: rgba(180, 60, 60, 0.1);
-  border: 1px solid rgba(180, 60, 60, 0.3);
+  background: rgba(180, 60, 60, 0.12);
+  border: 1px solid rgba(180, 60, 60, 0.35);
   border-radius: 6px;
 }
 .booked-item .date {
@@ -268,7 +281,7 @@
 
 .no-data {
   text-align: center;
-  color: rgba(232, 220, 196, 0.5);
+  color: rgba(231, 242, 236, 0.55);
   font-style: italic;
   padding: 20px;
 }
@@ -307,11 +320,29 @@
     margin: 40px 15px;
     padding: 25px;
   }
+  .admin-dashboard__top {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .admin-dashboard h2 {
+    font-size: 1.8rem;
+    text-align: left;
+    margin-bottom: 16px;
+  }
+  .admin-dashboard__logout {
+    width: 100%;
+  }
   .admin-section {
     padding: 18px;
   }
   .calendar-grid {
     gap: 6px;
+  }
+  .calendar-wrapper {
+    padding: 16px;
+  }
+  .calendar-header h4 {
+    font-size: 1rem;
   }
   .calendar-legend {
     flex-wrap: wrap;
@@ -321,5 +352,53 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 6px;
+  }
+}
+@media (max-width: 560px) {
+  .admin-dashboard {
+    margin: 24px 12px;
+    padding: 18px;
+  }
+  .admin-section {
+    padding: 14px;
+  }
+  .calendar-grid {
+    gap: 4px;
+  }
+  .calendar-day,
+  .calendar-day-header {
+    font-size: 0.75rem;
+  }
+  .calendar-header button {
+    width: 30px;
+    height: 30px;
+  }
+}
+@media (max-width: 420px) {
+  .calendar-wrapper {
+    padding: 12px;
+  }
+  .calendar-grid {
+    gap: 3px;
+  }
+  .calendar-day-header {
+    font-size: 0.65rem;
+  }
+  .calendar-day {
+    font-size: 0.7rem;
+  }
+  .calendar-day:hover {
+    transform: none;
+  }
+}
+@media (max-width: 360px) {
+  .calendar-grid {
+    gap: 2px;
+  }
+  .calendar-day-header {
+    font-size: 0.6rem;
+  }
+  .calendar-day {
+    font-size: 0.65rem;
   }
 }/*# sourceMappingURL=Dashboard.css.map */
