@@ -3,8 +3,9 @@ import Navbar from "./components/Navbar/Navbar";
 import FloatingButtons from "./components/FloatingButtons/FloatingButtons";
 import Footer from "./components/Footer/Footer";
 import AppRoutes from "./routes/Routes";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
+import StayRoomPopup from "./components/StayRoomPopup/StayRoomPopup";
 
 const ADMIN_ROUTES = ["/admin", "/admin-login"];
 
@@ -32,9 +33,12 @@ const ScrollToAnchor = () => {
 
 const App = () => {
   const location = useLocation();
-  const isAdminRoute = ADMIN_ROUTES.some((r) =>
-    location.pathname.startsWith(r)
-  );
+  const isAdminRoute = ADMIN_ROUTES.some((r) => location.pathname.startsWith(r));
+  const [showStayPopup, setShowStayPopup] = useState(false);
+
+  useEffect(() => {
+    if (!isAdminRoute) setShowStayPopup(true);
+  }, [isAdminRoute]);
 
   return (
     <div className="app">
@@ -47,9 +51,14 @@ const App = () => {
 
       {!isAdminRoute && <Footer />}
       {!isAdminRoute && <FloatingButtons />}
+      {!isAdminRoute && (
+        <StayRoomPopup
+          isOpen={showStayPopup}
+          onClose={() => setShowStayPopup(false)}
+        />
+      )}
     </div>
   );
 };
 
 export default App;
-
