@@ -130,7 +130,8 @@
   overflow: hidden;
   border: 1px solid rgba(63, 161, 120, 0.3);
 }
-.upload-form .preview img {
+.upload-form .preview img,
+.upload-form .preview video {
   width: 100%;
   height: auto;
   display: block;

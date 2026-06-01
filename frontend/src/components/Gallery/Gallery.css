@@ -26,12 +26,13 @@
   border-radius: 7px;
   cursor: pointer;
 }
-.gallery__item img {
+.gallery__item .gallery__media {
   width: 100%;
   display: block;
   transition: transform 0.5s;
+  background: #0d1414;
 }
-.gallery__item:hover img {
+.gallery__item:hover .gallery__media {
   transform: scale(1.05);
 }
 .gallery__item:hover .gallery__overlay {
@@ -85,11 +86,12 @@
   align-items: center;
   justify-content: center;
 }
-.gallery__lightbox img {
+.gallery__lightbox-media {
   max-width: 90vw;
   max-height: 85vh;
   border-radius: 6px;
   box-shadow: 0 8px 60px rgba(0, 0, 0, 0.5);
+  background: #0d1414;
 }
 .gallery__lightbox-close {
   position: absolute;

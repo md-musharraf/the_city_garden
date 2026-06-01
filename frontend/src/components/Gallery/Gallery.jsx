@@ -5,7 +5,7 @@ import "./Gallery.scss";
 const PAGE_SIZE = 9;
 
 const Gallery = () => {
-  const [images, setImages] = useState([]);
+  const [mediaItems, setMediaItems] = useState([]);
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
   const [lightbox, setLightbox] = useState(null);
@@ -38,8 +38,8 @@ const Gallery = () => {
   const load = async (nextSkip = 0) => {
     try {
       const res = await axios.get(`/api/images?limit=${PAGE_SIZE}&skip=${nextSkip}`);
-      if (nextSkip === 0) setImages(res.data.images);
-      else setImages((prev) => [...prev, ...res.data.images]);
+      if (nextSkip === 0) setMediaItems(res.data.images);
+      else setMediaItems((prev) => [...prev, ...res.data.images]);
       setTotal(res.data.total || 0);
       setSkip(nextSkip + PAGE_SIZE);
     } catch (err) {
@@ -65,23 +65,38 @@ const Gallery = () => {
       </div>
 
       <div className="gallery__grid fade-up">
-        {images.map((img) => (
+        {mediaItems.map((item) => (
           <div
-            key={img._id}
+            key={item._id}
             className="gallery__item"
             role="button"
             tabIndex={0}
-            aria-label={`View ${img.event}`}
-            onClick={() => setLightbox({ src: img.image, alt: img.event })}
-            onKeyDown={(e) => e.key === "Enter" && setLightbox({ src: img.image, alt: img.event })}
+            aria-label={`View ${item.event}`}
+            onClick={() => setLightbox({ src: item.image, alt: item.event, type: item.mediaType })}
+            onKeyDown={(e) =>
+              e.key === "Enter" &&
+              setLightbox({ src: item.image, alt: item.event, type: item.mediaType })
+            }
           >
-            <img
-              src={img.image}
-              alt={img.event}
-              loading="lazy"
-            />
+            {item.mediaType === "video" ? (
+              <video
+                className="gallery__media"
+                src={item.image}
+                muted
+                loop
+                playsInline
+                autoPlay
+              />
+            ) : (
+              <img
+                className="gallery__media"
+                src={item.image}
+                alt={item.event}
+                loading="lazy"
+              />
+            )}
             <div className="gallery__overlay">
-              <span>{img.event}</span>
+              <span>{item.event}</span>
             </div>
           </div>
         ))}
@@ -111,10 +126,22 @@ const Gallery = () => {
           >
             ×
           </button>
-          <img
-            src={lightbox.src}
-            alt={lightbox.alt}
-          />
+          {lightbox.type === "video" ? (
+            <video
+              className="gallery__lightbox-media"
+              src={lightbox.src}
+              muted
+              loop
+              playsInline
+              autoPlay
+            />
+          ) : (
+            <img
+              className="gallery__lightbox-media"
+              src={lightbox.src}
+              alt={lightbox.alt}
+            />
+          )}
         </div>
       )}
     </section>

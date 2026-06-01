@@ -23,6 +23,9 @@ const AdminDashboard = () => {
   const [file, setFile] = useState(null);
   const [preview, setPreview] = useState("");
   const [eventName, setEventName] = useState("");
+  const [videoFile, setVideoFile] = useState(null);
+  const [videoPreview, setVideoPreview] = useState("");
+  const [videoEventName, setVideoEventName] = useState("");
   const [msg, setMsg] = useState("");
   const [msgType, setMsgType] = useState("success");
   const [bookingDate, setBookingDate] = useState("");
@@ -62,6 +65,13 @@ const AdminDashboard = () => {
     }
   };
 
+  const handleVideoChange = (e) => {
+    const f = e.target.files?.[0];
+    setVideoFile(f);
+    if (videoPreview) URL.revokeObjectURL(videoPreview);
+    setVideoPreview(f ? URL.createObjectURL(f) : "");
+  };
+
   const showMsg = (text, type = "success") => {
     setMsg(text);
     setMsgType(type);
@@ -82,6 +92,27 @@ const AdminDashboard = () => {
       setFile(null);
       setPreview("");
       setEventName("");
+    } catch (err) {
+      console.error(err);
+      showMsg(err.response?.data?.message || "Upload failed", "error");
+    }
+  };
+
+  const uploadVideo = async (e) => {
+    e.preventDefault();
+    if (!videoFile || !videoEventName) return showMsg("Select video and event name", "error");
+    const fd = new FormData();
+    fd.append("video", videoFile);
+    fd.append("event", videoEventName);
+    try {
+      const res = await axios.post("/api/upload/video", fd, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+      showMsg(res.data.message || "Video uploaded successfully!");
+      setVideoFile(null);
+      if (videoPreview) URL.revokeObjectURL(videoPreview);
+      setVideoPreview("");
+      setVideoEventName("");
     } catch (err) {
       console.error(err);
       showMsg(err.response?.data?.message || "Upload failed", "error");
@@ -205,6 +236,49 @@ const AdminDashboard = () => {
             onChange={(e) => setEventName(e.target.value)}
           />
           <button type="submit">Upload Image</button>
+        </form>
+      </section>
+
+      {/* Upload Video Section */}
+      <section className="admin-section">
+        <h3>🎥 Upload Video</h3>
+        <form
+          onSubmit={uploadVideo}
+          className="upload-form"
+        >
+          <div className="file-input-wrapper">
+            <input
+              type="file"
+              id="videoInput"
+              accept="video/*"
+              onChange={handleVideoChange}
+              className="file-input"
+            />
+            <label
+              htmlFor="videoInput"
+              className="file-label"
+            >
+              Choose Video
+            </label>
+          </div>
+          {videoPreview && (
+            <div className="preview">
+              <video
+                src={videoPreview}
+                muted
+                loop
+                playsInline
+                autoPlay
+              />
+            </div>
+          )}
+          <input
+            type="text"
+            placeholder="Event name (Wedding, Reception, etc.)"
+            value={videoEventName}
+            onChange={(e) => setVideoEventName(e.target.value)}
+          />
+          <button type="submit">Upload Video</button>
         </form>
       </section>
 

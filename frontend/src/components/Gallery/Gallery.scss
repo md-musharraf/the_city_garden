@@ -23,13 +23,14 @@
     border-radius: 7px;
     cursor: pointer;
 
-    img {
+    .gallery__media {
       width: 100%;
       display: block;
       transition: transform 0.5s;
+      background: #0d1414;
     }
 
-    &:hover img {
+    &:hover .gallery__media {
       transform: scale(1.05);
     }
 
@@ -90,13 +91,14 @@
     background: rgba(10, 20, 20, 0.95);
     align-items: center;
     justify-content: center;
+  }
 
-    img {
-      max-width: 90vw;
-      max-height: 85vh;
-      border-radius: 6px;
-      box-shadow: 0 8px 60px rgba(0, 0, 0, 0.5);
-    }
+  &__lightbox-media {
+    max-width: 90vw;
+    max-height: 85vh;
+    border-radius: 6px;
+    box-shadow: 0 8px 60px rgba(0, 0, 0, 0.5);
+    background: #0d1414;
   }
 
   &__lightbox-close {
