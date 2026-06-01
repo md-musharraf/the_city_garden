@@ -50,7 +50,7 @@ const App = () => {
       </main>
 
       {!isAdminRoute && <Footer />}
-      {!isAdminRoute && <FloatingButtons />}
+      {!isAdminRoute && <FloatingButtons onStayRoomClick={() => setShowStayPopup(true)} />}
       {!isAdminRoute && (
         <StayRoomPopup
           isOpen={showStayPopup}

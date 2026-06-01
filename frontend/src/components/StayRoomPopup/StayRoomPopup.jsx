@@ -11,6 +11,14 @@ const StayRoomPopup = ({ isOpen, onClose }) => {
     return () => window.removeEventListener("keydown", onKey);
   }, [isOpen, onClose]);
 
+  useEffect(() => {
+    if (!isOpen) return undefined;
+    const timer = setTimeout(() => {
+      onClose();
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, [isOpen, onClose]);
+
   if (!isOpen) return null;
 
   return (
@@ -68,6 +76,13 @@ const StayRoomPopup = ({ isOpen, onClose }) => {
           >
             WhatsApp
           </a>
+          <button
+            type="button"
+            className="stay-popup__btn stay-popup__btn--ghost"
+            onClick={onClose}
+          >
+            Skip
+          </button>
         </div>
         <div className="stay-popup__keywords">
           stay room available • single room • double room • ac room • non ac room

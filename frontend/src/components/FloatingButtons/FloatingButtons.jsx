@@ -1,11 +1,11 @@
-import { FaWhatsapp, FaCalendarCheck } from "react-icons/fa";
+import { FaWhatsapp, FaCalendarCheck, FaBed } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import "./FloatingButtons.scss";
 
 const WA_URL =
   "https://wa.me/919934080104?text=Hello!%20I'd%20like%20to%20book%20THE%20CITY%20GARDEN%20for%20my%20event.";
 
-const FloatingButtons = () => (
+const FloatingButtons = ({ onStayRoomClick }) => (
   <>
     <a
       href={WA_URL}
@@ -18,9 +18,22 @@ const FloatingButtons = () => (
       <FaWhatsapp />
     </a>
 
-    <Link to="/booking" className="float-book" id="float-book">
+    <Link
+      to="/booking"
+      className="float-book"
+      id="float-book"
+    >
       <FaCalendarCheck /> Book Now
     </Link>
+
+    <button
+      type="button"
+      className="float-stay"
+      onClick={onStayRoomClick}
+      aria-label="Stay room availability"
+    >
+      <FaBed /> Stay Room
+    </button>
   </>
 );
 
