@@ -1,6 +1,6 @@
-import { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import { FaTree, FaStar, FaRoad, FaUsers, FaConciergeBell } from "react-icons/fa";
+import ScrollReveal from "../ScrollReveal";
 import "./About.scss";
 
 const features = [
@@ -18,36 +18,32 @@ const features = [
 ];
 
 const About = () => {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       className="section section--light about"
       id="about"
-      ref={ref}
     >
       <div className="about__grid">
-        <div className="about__img-wrap fade-up">
-          <img
-            src="https://ik.imagekit.io/ts2hm0adf/the-city-garden/IMG-20260527-WA0034.jpg?updatedAt=1780237999486"
-            alt="THE CITY GARDEN Venue"
-          />
+        <ScrollReveal
+          animation="slide-in-left"
+          className="about__img-wrap"
+        >
+          <div className="about__img-inner">
+            <img
+              src="https://ik.imagekit.io/ts2hm0adf/the-city-garden/IMG-20260527-WA0034.jpg?updatedAt=1780237999486"
+              alt="THE CITY GARDEN Venue"
+            />
+          </div>
           <div className="about__badge">
             <div className="about__badge-num">5★</div>
             <div className="about__badge-lbl">Rated Venue</div>
           </div>
-        </div>
+        </ScrollReveal>
 
-        <div className="about__text fade-up delay-2">
+        <ScrollReveal
+          animation="slide-in-right"
+          className="about__text"
+        >
           <div className="section-tag">Discover THE CITY GARDEN</div>
           <h2>Dumka's Elegant Garden Venue</h2>
           <p className="about__lead">
@@ -57,14 +53,17 @@ const About = () => {
           </p>
 
           <ul className="about__features">
-            {features.map(({ icon, text }) => (
-              <li
+            {features.map(({ icon, text }, idx) => (
+              <ScrollReveal
+                as="li"
                 key={text}
+                animation="fade-up"
+                delay={idx + 1}
                 className="about__feature"
               >
                 <span>{icon}</span>
                 <p>{text}</p>
-              </li>
+              </ScrollReveal>
             ))}
           </ul>
 
@@ -74,7 +73,7 @@ const About = () => {
           >
             Reserve Your Date
           </Link>
-        </div>
+        </ScrollReveal>
       </div>
     </section>
   );

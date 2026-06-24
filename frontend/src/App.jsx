@@ -35,13 +35,35 @@ const App = () => {
   const location = useLocation();
   const isAdminRoute = ADMIN_ROUTES.some((r) => location.pathname.startsWith(r));
   const [showStayPopup, setShowStayPopup] = useState(false);
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
     if (!isAdminRoute) setShowStayPopup(true);
   }, [isAdminRoute]);
 
+  useEffect(() => {
+    if (isAdminRoute) return undefined;
+
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      if (totalHeight > 0) {
+        const progress = (window.scrollY / totalHeight) * 100;
+        setScrollProgress(progress);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [isAdminRoute]);
+
   return (
     <div className="app">
+      {!isAdminRoute && (
+        <div
+          className="scroll-progress"
+          style={{ width: `${scrollProgress}%` }}
+        />
+      )}
       {!isAdminRoute && <Navbar />}
       <ScrollToAnchor />
 

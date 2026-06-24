@@ -2,11 +2,11 @@
 
 .packages {
   &__grid {
-    max-width: 1000px;
+    max-width: 1100px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: repeat(3,1fr);
-    gap: 24px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
 
     @media (max-width: $bp-md) {
       grid-template-columns: 1fr;
@@ -16,27 +16,45 @@
 
   &__card {
     background: $white;
-    border-radius: 10px;
-    padding: 40px 28px;
+    border-radius: 12px;
+    padding: 44px 30px;
     text-align: center;
     position: relative;
-    transition: all .35s;
+    transition: $transition-smooth;
     border: 2px solid transparent;
-    box-shadow: 0 4px 24px rgba($forest,.08);
+    box-shadow: $shadow;
 
-    &:hover { transform: translateY(-8px); box-shadow: 0 16px 50px rgba($forest,.15); }
+    &:hover {
+      transform: translateY(-8px);
+      box-shadow: $shadow-premium;
+      border-color: rgba($gold, 0.35);
+    }
 
     &--featured {
       background: $forest;
       border-color: $gold;
       transform: scale(1.04);
+      animation: heartbeat 4s infinite alternate ease-in-out;
+      box-shadow: $shadow-glow-gold;
 
-      &:hover { transform: scale(1.04) translateY(-8px); }
+      &:hover {
+        transform: scale(1.05) translateY(-8px);
+        animation-play-state: paused;
+        box-shadow: $shadow-premium, $shadow-glow-gold;
+      }
 
-      .packages__name,
-      .packages__features li { color: rgba($cream,.8); }
-      .packages__price { color: $gold; }
-      .packages__per   { color: rgba($cream,.55); }
+      .packages__name {
+        color: $gold-light;
+      }
+      .packages__features li {
+        color: rgba($cream, 0.85);
+      }
+      .packages__price {
+        color: $cream;
+      }
+      .packages__per {
+        color: rgba($cream, 0.55);
+      }
     }
   }
 
@@ -45,26 +63,28 @@
     top: -14px;
     left: 50%;
     transform: translateX(-50%);
-    background: $gold;
+    background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
     color: $dark-bg;
-    padding: 4px 16px;
+    padding: 6px 18px;
     border-radius: 20px;
     font-size: .72rem;
     font-weight: 700;
-    letter-spacing: 1px;
+    letter-spacing: 1.2px;
     text-transform: uppercase;
     white-space: nowrap;
+    box-shadow: 0 4px 10px rgba($gold, 0.3);
   }
 
   &__name {
     font-family: $font-serif;
-    font-size: 1.3rem;
+    font-size: 1.4rem;
     color: $forest;
-    margin-bottom: 6px;
+    margin-bottom: 8px;
+    font-weight: 700;
   }
 
   &__price {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 700;
     font-family: $font-serif;
     color: $forest;
@@ -72,50 +92,81 @@
   }
 
   &__per {
-    font-size: .78rem;
+    font-size: .82rem;
     color: $text-mid;
-    margin-bottom: 24px;
+    margin-bottom: 28px;
+    font-weight: 300;
   }
 
   &__features {
     list-style: none;
-    margin-bottom: 30px;
+    margin-bottom: 36px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
     text-align: left;
 
     li {
-      font-size: .85rem;
+      font-size: .88rem;
       color: $text-mid;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 12px;
+      transition: $transition-smooth;
+
+      &:hover {
+        transform: translateX(4px);
+        
+        .packages__check {
+          transform: scale(1.2);
+        }
+      }
     }
   }
 
-  &__check { color: $gold; font-size: .8rem; flex-shrink: 0; }
-  &__cross  { color: #c77;  font-size: .8rem; flex-shrink: 0; }
+  &__check {
+    color: $gold;
+    font-size: .9rem;
+    flex-shrink: 0;
+    transition: transform 0.2s;
+  }
+  &__cross {
+    color: #e57373;
+    font-size: .9rem;
+    flex-shrink: 0;
+  }
 
   &__btn {
     display: block;
-    padding: 12px 28px;
-    border-radius: 5px;
-    font-size: .88rem;
+    padding: 14px 28px;
+    border-radius: 6px;
+    font-size: .9rem;
     font-weight: 600;
     letter-spacing: .5px;
-    transition: all .3s;
-    background: $forest;
+    transition: $transition-smooth;
+    background: linear-gradient(135deg, $forest 0%, $forest-light 100%);
     color: $cream;
     text-decoration: none;
+    box-shadow: 0 4px 12px rgba($forest, 0.15);
 
-    &:hover { background: $forest-light; }
+    &:hover {
+      background: $dark-bg;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 15px rgba($forest, 0.3);
+    }
 
     .packages__card--featured & {
-      background: $gold;
+      background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
       color: $dark-bg;
+      box-shadow: 0 4px 12px rgba($gold, 0.2);
 
-      &:hover { background: $gold-light; }
+      &:hover {
+        background: $cream;
+        color: $forest;
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba($gold, 0.45);
+      }
     }
   }
 }
+

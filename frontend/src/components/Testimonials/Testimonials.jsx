@@ -1,4 +1,5 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import ScrollReveal from "../ScrollReveal";
 import "./Testimonials.scss";
 
 const reviews = [
@@ -30,16 +31,6 @@ const reviews = [
 
 const Testimonials = () => {
   const [current, setCurrent] = useState(0);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const timer = setInterval(() => setCurrent((c) => (c + 1) % reviews.length), 5000);
@@ -50,15 +41,20 @@ const Testimonials = () => {
     <section
       className="section section--mid testimonials"
       id="testimonials"
-      ref={ref}
     >
-      <div className="section-header fade-up">
+      <ScrollReveal
+        animation="fade-up"
+        className="section-header"
+      >
         <div className="section-tag">Testimonials</div>
         <h2>What Our Guests Say</h2>
         <div className="divider" />
-      </div>
+      </ScrollReveal>
 
-      <div className="testi fade-up">
+      <ScrollReveal
+        animation="scale-in"
+        className="testi"
+      >
         <div
           className="testi__track"
           id="testiSlides"
@@ -79,6 +75,14 @@ const Testimonials = () => {
           ))}
         </div>
 
+        {/* Timeline progress indicator */}
+        <div className="testi__progress">
+          <div
+            key={current}
+            className="testi__progress-bar"
+          />
+        </div>
+
         <div
           className="testi__dots"
           id="testiDots"
@@ -92,7 +96,7 @@ const Testimonials = () => {
             />
           ))}
         </div>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

@@ -1,6 +1,7 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { FaWhatsapp } from "react-icons/fa";
+import ScrollReveal from "../ScrollReveal";
 import "./Booking.scss";
 import axios from "../../axios/config";
 
@@ -155,7 +156,6 @@ const Calendar = ({ onDateSelect }) => {
 };
 
 const Booking = () => {
-  const ref = useRef(null);
   const [bookingMsg, setBookingMsg] = useState("");
   const [bookingError, setBookingError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -167,15 +167,6 @@ const Booking = () => {
     reset,
     formState: { errors },
   } = useForm();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   const onSubmit = async (data) => {
     setBookingError("");
@@ -223,9 +214,11 @@ const Booking = () => {
     <section
       className="section section--dark booking"
       id="booking"
-      ref={ref}
     >
-      <div className="section-header fade-up">
+      <ScrollReveal
+        animation="fade-up"
+        className="section-header"
+      >
         <div className="section-tag">Availability &amp; Booking</div>
         <h2>Reserve Your Perfect Date</h2>
         <div className="divider" />
@@ -233,9 +226,12 @@ const Booking = () => {
           Check availability and submit your booking request — we'll confirm within 24 hours via
           WhatsApp.
         </p>
-      </div>
+      </ScrollReveal>
 
-      <div className="booking__wrap fade-up">
+      <ScrollReveal
+        animation="scale-in"
+        className="booking__wrap"
+      >
         <Calendar onDateSelect={(val) => setValue("date", val)} />
 
         <form
@@ -353,7 +349,7 @@ const Booking = () => {
             {isSubmitting ? " Sending…" : " Confirm Booking via WhatsApp"}
           </button>
         </form>
-      </div>
+      </ScrollReveal>
     </section>
   );
 };

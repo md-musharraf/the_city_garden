@@ -1,21 +1,10 @@
-import { useEffect, useRef } from "react";
 import { useForm } from "react-hook-form";
 import { FaWhatsapp, FaPhone, FaMapMarkerAlt } from "react-icons/fa";
+import ScrollReveal from "../ScrollReveal";
 import "./Contact.scss";
 
 const Contact = () => {
-  const ref = useRef(null);
-
   const { register, handleSubmit } = useForm();
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   const onSubmit = ({ name, phone, event, message }) => {
     const text =
@@ -31,17 +20,19 @@ const Contact = () => {
     <section
       className="section section--light contact"
       id="contact"
-      ref={ref}
     >
-      <div className="section-header fade-up">
+      <ScrollReveal
+        animation="fade-up"
+        className="section-header"
+      >
         <div className="section-tag">Get In Touch</div>
         <h2>We'd Love to Hear From You</h2>
         <div className="divider" />
-      </div>
+      </ScrollReveal>
 
       <div className="contact__grid">
         {/* Left col */}
-        <div className="fade-up">
+        <ScrollReveal animation="slide-in-left">
           <div className="contact__info">
             <h2>Visit or Call Us</h2>
             <p className="contact__lead">
@@ -104,11 +95,14 @@ const Contact = () => {
               />
             </div>
           </div>
-        </div>
+        </ScrollReveal>
 
         {/* Right col — contact form */}
-        <form
-          className="contact__form fade-up delay-2"
+        <ScrollReveal
+          as="form"
+          animation="slide-in-right"
+          delay="2"
+          className="contact__form"
           onSubmit={handleSubmit(onSubmit)}
           noValidate
         >
@@ -171,7 +165,7 @@ const Contact = () => {
           >
             <FaWhatsapp /> Send via WhatsApp
           </button>
-        </form>
+        </ScrollReveal>
       </div>
     </section>
   );

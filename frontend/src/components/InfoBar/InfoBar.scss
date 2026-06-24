@@ -17,14 +17,17 @@
     font-weight: 600;
     color: $dark-bg;
     text-decoration: none;
-    transition: opacity .2s;
+    transition: $transition-smooth;
     cursor: pointer;
     background: none;
     border: none;
 
-    &:hover { opacity: .75; }
+    &:hover {
+      color: $white;
+      transform: translateY(-1px);
+    }
 
-    svg { font-size: .9rem; }
+    svg { font-size: .95rem; }
   }
 
   &__text {

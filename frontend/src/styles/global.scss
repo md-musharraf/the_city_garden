@@ -202,28 +202,128 @@ ul {
   }
 }
 
-// ─── FADE-UP ANIMATION ────────────────────────────────────────────────────────
-.fade-up {
-  opacity: 0;
-  transform: translateY(30px);
-  transition:
-    opacity 0.7s ease,
-    transform 0.7s ease;
+// ─── CUSTOM SCROLLBAR & SELECTION ─────────────────────────────────────────────
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: $dark-bg;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, $gold 0%, $forest-light 100%);
+  border-radius: 5px;
+  border: 2px solid $dark-bg;
 
-  &.visible {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  &.delay-1 {
-    transition-delay: 0.1s;
-  }
-  &.delay-2 {
-    transition-delay: 0.2s;
-  }
-  &.delay-3 {
-    transition-delay: 0.3s;
-  }
-  &.delay-4 {
-    transition-delay: 0.4s;
+  &:hover {
+    background: linear-gradient(180deg, $gold-light 0%, $forest 100%);
   }
 }
+
+::selection {
+  background: $gold;
+  color: $dark-bg;
+}
+
+// ─── PREMIUM SCROLL PROGRESS ──────────────────────────────────────────────────
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background: linear-gradient(90deg, $gold 0%, $gold-light 50%, $forest-light 100%);
+  z-index: 1000;
+  width: 0;
+  transition: width 0.1s ease-out;
+}
+
+// ─── REVEAL ANIMATIONS ────────────────────────────────────────────────────────
+.fade-in,
+.fade-up,
+.slide-in-left,
+.slide-in-right,
+.scale-in,
+.reveal-blur {
+  opacity: 0;
+  transition: 
+    opacity 0.8s $ease-out-expo, 
+    transform 0.8s $ease-out-expo, 
+    filter 0.8s $ease-out-expo;
+  will-change: transform, opacity, filter;
+}
+
+.fade-up {
+  transform: translateY(40px);
+}
+
+.slide-in-left {
+  transform: translateX(-50px);
+}
+
+.slide-in-right {
+  transform: translateX(50px);
+}
+
+.scale-in {
+  transform: scale(0.92);
+}
+
+.reveal-blur {
+  filter: blur(8px);
+  transform: translateY(20px);
+}
+
+// Visible states
+.visible {
+  opacity: 1 !important;
+  transform: translate(0) scale(1) !important;
+  filter: blur(0) !important;
+}
+
+// Animation delays using Sass @for loop
+@for $i from 1 through 8 {
+  .delay-#{$i} {
+    transition-delay: #{$i * 0.12}s !important;
+  }
+}
+
+// Keyframes
+@keyframes kenburns {
+  0% {
+    transform: scale(1) translate(0, 0);
+  }
+  100% {
+    transform: scale(1.12) translate(-1%, -1%);
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 8px 24px rgba($gold, 0.24);
+  }
+  50% {
+    transform: scale(1.04);
+    box-shadow: 0 12px 30px rgba($gold, 0.45);
+  }
+}
+
+@keyframes pulse-wa {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  50% {
+    transform: scale(1.08);
+    box-shadow: 0 0 20px 8px rgba(37, 211, 102, 0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-8px);
+  }
+}
+

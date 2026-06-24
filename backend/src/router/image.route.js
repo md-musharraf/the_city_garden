@@ -59,4 +59,20 @@ router.get("/images", async (req, res) => {
   }
 });
 
+// DELETE /api/images/:id
+router.delete("/images/:id", verifyAdmin, async (req, res) => {
+  try {
+    const { id } = req.params;
+    const deletedImage = await Image.findByIdAndDelete(id);
+    if (!deletedImage) {
+      return res.status(404).json({ message: "Media not found" });
+    }
+    res.json({ message: "Media deleted successfully from gallery" });
+  } catch (err) {
+    console.error("Delete media error:", err);
+    res.status(500).json({ message: err.message || "Failed to delete media" });
+  }
+});
+
 module.exports = router;
+

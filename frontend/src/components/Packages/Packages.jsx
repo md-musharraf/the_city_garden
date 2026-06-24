@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import ScrollReveal from "../ScrollReveal";
 import { FaCheck, FaTimes } from "react-icons/fa";
 import "./Packages.scss";
 
@@ -55,34 +55,27 @@ const packages = [
 ];
 
 const Packages = () => {
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
-
   return (
     <section
       className="section section--tint packages"
       id="packages"
-      ref={ref}
     >
-      <div className="section-header fade-up">
+      <ScrollReveal
+        animation="fade-up"
+        className="section-header"
+      >
         <div className="section-tag">Our Packages</div>
         <h2>Choose What Suits You Best</h2>
         <div className="divider" />
         <p>Flexible packages designed to fit every celebration style and budget.</p>
-      </div>
+      </ScrollReveal>
 
-      <div className="packages__grid fade-up">
-        {packages.map(({ name, price, per, badge, features, wa, cta, featured }) => (
-          <div
+      <div className="packages__grid">
+        {packages.map(({ name, price, per, badge, features, wa, cta, featured }, idx) => (
+          <ScrollReveal
             key={name}
+            animation="scale-in"
+            delay={idx + 1}
             className={`packages__card${featured ? " packages__card--featured" : ""}`}
           >
             {badge && <div className="packages__badge">{badge}</div>}
@@ -111,7 +104,7 @@ const Packages = () => {
             >
               {cta}
             </a>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
     </section>

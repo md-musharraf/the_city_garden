@@ -20,65 +20,83 @@
     margin-bottom: 16px;
     position: relative;
     overflow: hidden;
-    border-radius: 7px;
+    border-radius: 8px;
     cursor: pointer;
+    box-shadow: $shadow;
+    transition: $transition-smooth;
 
     .gallery__media {
       width: 100%;
       display: block;
-      transition: transform 0.5s;
+      transition: transform 0.6s $ease-out-expo;
       background: #0d1414;
     }
 
-    &:hover .gallery__media {
-      transform: scale(1.05);
-    }
+    &:hover {
+      box-shadow: $shadow-premium;
+      
+      .gallery__media {
+        transform: scale(1.06);
+      }
 
-    &:hover .gallery__overlay {
-      opacity: 1;
+      .gallery__overlay {
+        opacity: 1;
+        span {
+          transform: translateY(0);
+        }
+      }
     }
   }
 
   &__overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(to top, rgba($dark-bg, 0.85) 0%, transparent 50%);
+    background: linear-gradient(to top, rgba($dark-bg, 0.9) 0%, transparent 60%);
     opacity: 0;
-    transition: opacity 0.3s;
+    transition: opacity 0.35s ease;
     display: flex;
     align-items: flex-end;
-    padding: 18px;
+    padding: 20px;
+    z-index: 2;
 
     span {
       color: $cream;
-      font-size: 0.85rem;
+      font-size: 0.9rem;
       font-weight: 500;
+      font-family: $font-serif;
+      transform: translateY(10px);
+      transition: transform 0.4s $ease-out-expo;
     }
   }
 
   &__more {
     display: flex;
     justify-content: center;
-    margin-top: 28px;
+    margin-top: 36px;
 
     button {
-      padding: 12px 28px;
+      padding: 12px 32px;
       border-radius: 999px;
-      border: 1px solid rgba($gold, 0.55);
-      background: rgba($dark-bg, 0.08);
+      border: 2px solid rgba($gold, 0.6);
+      background: rgba($dark-bg, 0.05);
       color: $forest;
       font-family: $font-sans;
       font-weight: 600;
-      letter-spacing: 0.3px;
+      letter-spacing: 0.5px;
       cursor: pointer;
-      transition: all 0.25s ease;
-      box-shadow: 0 8px 20px rgba($gold, 0.15);
+      transition: $transition-smooth;
+      box-shadow: 0 8px 20px rgba($gold, 0.12);
 
       &:hover {
-        background: $gold;
+        background: linear-gradient(135deg, $gold 0%, $gold-light 100%);
         color: $dark-bg;
         transform: translateY(-2px);
-        box-shadow: 0 12px 28px rgba($gold, 0.3);
+        box-shadow: 0 12px 28px rgba($gold, 0.35);
+        border-color: $gold;
+      }
+      
+      &:active {
+        transform: translateY(0);
       }
     }
   }
@@ -88,34 +106,59 @@
     position: fixed;
     inset: 0;
     z-index: 9999;
-    background: rgba(10, 20, 20, 0.95);
+    background: rgba(13, 29, 26, 0.85);
+    backdrop-filter: blur(15px);
     align-items: center;
     justify-content: center;
+    animation: lightboxFadeIn 0.3s ease-out;
   }
 
   &__lightbox-media {
     max-width: 90vw;
     max-height: 85vh;
-    border-radius: 6px;
-    box-shadow: 0 8px 60px rgba(0, 0, 0, 0.5);
+    border-radius: 8px;
+    border: 1px solid rgba($gold, 0.25);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
     background: #0d1414;
+    animation: lightboxZoomIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   &__lightbox-close {
     position: absolute;
-    top: 20px;
-    right: 28px;
+    top: 24px;
+    right: 32px;
     color: $cream;
-    font-size: 2rem;
+    font-size: 2.2rem;
     cursor: pointer;
-    background: none;
-    border: none;
+    background: rgba($white, 0.08);
+    border: 1px solid rgba($white, 0.15);
+    border-radius: 50%;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-family: inherit;
-    opacity: 0.7;
-    transition: opacity 0.2s;
+    line-height: 1;
+    transition: $transition-smooth;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
 
     &:hover {
-      opacity: 1;
+      background: $gold;
+      color: $dark-bg;
+      border-color: $gold;
+      transform: rotate(90deg) scale(1.05);
     }
   }
 }
+
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes lightboxZoomIn {
+  from { transform: scale(0.92); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+

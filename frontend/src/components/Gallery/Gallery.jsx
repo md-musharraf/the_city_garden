@@ -1,5 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "../../axios/config";
+import ScrollReveal from "../ScrollReveal";
 import "./Gallery.scss";
 
 const PAGE_SIZE = 9;
@@ -9,16 +10,6 @@ const Gallery = () => {
   const [total, setTotal] = useState(0);
   const [skip, setSkip] = useState(0);
   const [lightbox, setLightbox] = useState(null);
-  const ref = useRef(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => entries.forEach((e) => e.isIntersecting && e.target.classList.add("visible")),
-      { threshold: 0.12 },
-    );
-    ref.current?.querySelectorAll(".fade-up").forEach((el) => observer.observe(el));
-    return () => observer.disconnect();
-  }, []);
 
   useEffect(() => {
     const onKey = (e) => {
@@ -55,19 +46,23 @@ const Gallery = () => {
     <section
       className="section section--light gallery"
       id="gallery"
-      ref={ref}
     >
-      <div className="section-header fade-up">
+      <ScrollReveal
+        animation="fade-up"
+        className="section-header"
+      >
         <div className="section-tag">Our Gallery</div>
         <h2>Moments Captured at THE CITY GARDEN</h2>
         <div className="divider" />
         <p>A glimpse of the beautiful celebrations and memories created at our venue.</p>
-      </div>
+      </ScrollReveal>
 
-      <div className="gallery__grid fade-up">
-        {mediaItems.map((item) => (
-          <div
+      <div className="gallery__grid">
+        {mediaItems.map((item, idx) => (
+          <ScrollReveal
             key={item._id}
+            animation="scale-in"
+            delay={(idx % 3) + 1}
             className="gallery__item"
             role="button"
             tabIndex={0}
@@ -98,7 +93,7 @@ const Gallery = () => {
             <div className="gallery__overlay">
               <span>{item.event}</span>
             </div>
-          </div>
+          </ScrollReveal>
         ))}
       </div>
 

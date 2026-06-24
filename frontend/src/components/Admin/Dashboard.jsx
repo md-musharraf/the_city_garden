@@ -33,10 +33,12 @@ const AdminDashboard = () => {
   const [bookedDates, setBookedDates] = useState([]);
   const [calDate, setCalDate] = useState(new Date());
   const [selectedDates, setSelectedDates] = useState({});
+  const [mediaItems, setMediaItems] = useState([]);
 
-  // Fetch booked dates on mount
+  // Fetch booked dates & media on mount
   useEffect(() => {
     fetchBookedDates();
+    fetchMediaItems();
   }, []);
 
   const fetchBookedDates = async () => {
@@ -52,6 +54,27 @@ const AdminDashboard = () => {
       setSelectedDates(map);
     } catch (err) {
       console.error("Failed to fetch booked dates", err);
+    }
+  };
+
+  const fetchMediaItems = async () => {
+    try {
+      const res = await axios.get("/api/images?limit=1000&skip=0");
+      setMediaItems(res.data.images || []);
+    } catch (err) {
+      console.error("Failed to fetch gallery media", err);
+    }
+  };
+
+  const deleteMedia = async (id) => {
+    if (!window.confirm("Are you sure you want to delete this media item?")) return;
+    try {
+      await axios.delete(`/api/images/${id}`);
+      showMsg("Media deleted successfully!");
+      fetchMediaItems();
+    } catch (err) {
+      console.error(err);
+      showMsg(err.response?.data?.message || "Failed to delete media", "error");
     }
   };
 
@@ -92,6 +115,7 @@ const AdminDashboard = () => {
       setFile(null);
       setPreview("");
       setEventName("");
+      fetchMediaItems();
     } catch (err) {
       console.error(err);
       showMsg(err.response?.data?.message || "Upload failed", "error");
@@ -113,6 +137,7 @@ const AdminDashboard = () => {
       if (videoPreview) URL.revokeObjectURL(videoPreview);
       setVideoPreview("");
       setVideoEventName("");
+      fetchMediaItems();
     } catch (err) {
       console.error(err);
       showMsg(err.response?.data?.message || "Upload failed", "error");
@@ -280,6 +305,46 @@ const AdminDashboard = () => {
           />
           <button type="submit">Upload Video</button>
         </form>
+      </section>
+
+      {/* Manage Gallery Media Section */}
+      <section className="admin-section">
+        <h3>🖼️ Manage Gallery Media</h3>
+        {mediaItems.length > 0 ? (
+          <div className="media-mgr-grid">
+            {mediaItems.map((item) => (
+              <div
+                key={item._id}
+                className="media-mgr-card"
+              >
+                <div className="media-mgr-preview">
+                  {item.mediaType === "video" ? (
+                    <video
+                      src={item.image}
+                      muted
+                      playsInline
+                    />
+                  ) : (
+                    <img
+                      src={item.image}
+                      alt={item.event}
+                    />
+                  )}
+                  <span className="media-mgr-tag">{item.event}</span>
+                </div>
+                <button
+                  type="button"
+                  className="media-mgr-delete-btn"
+                  onClick={() => deleteMedia(item._id)}
+                >
+                  Delete
+                </button>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <p className="no-data">No media uploaded yet</p>
+        )}
       </section>
 
       {/* Calendar Section */}
