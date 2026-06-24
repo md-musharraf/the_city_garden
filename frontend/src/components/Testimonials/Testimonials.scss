@@ -26,6 +26,10 @@
     box-shadow: $shadow;
     transition: $transition-smooth;
 
+    @media (max-width: $bp-sm) {
+      padding: 28px 16px;
+    }
+
     &::before {
       content: '“';
       position: absolute;
@@ -34,6 +38,12 @@
       font-size: 6rem;
       color: rgba($gold, 0.12);
       line-height: 1;
+
+      @media (max-width: $bp-sm) {
+        font-size: 4rem;
+        left: 14px;
+        top: 6px;
+      }
     }
 
     &:hover {
@@ -56,6 +66,12 @@
     line-height: 1.85;
     font-weight: 300;
     margin-bottom: 28px;
+
+    @media (max-width: $bp-sm) {
+      font-size: 0.95rem;
+      line-height: 1.6;
+      margin-bottom: 16px;
+    }
   }
 
   &__author {

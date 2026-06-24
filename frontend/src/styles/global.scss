@@ -25,6 +25,10 @@ body {
     radial-gradient(circle at top, rgba($gold, 0.08), transparent 34%),
     linear-gradient(180deg, $cream 0%, $cream-dark 100%);
   overflow-x: hidden;
+
+  @media (max-width: $bp-sm) {
+    padding-bottom: 72px; // Safety offset for mobile bottom navigation bar
+  }
 }
 
 h1,
@@ -45,6 +49,10 @@ ul {
 // ─── SECTION BASE ─────────────────────────────────────────────────────────────
 .section {
   padding: 90px 24px;
+
+  @media (max-width: $bp-sm) {
+    padding: 56px 16px;
+  }
 
   &--light {
     background: $cream;

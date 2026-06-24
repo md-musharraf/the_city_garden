@@ -7,6 +7,10 @@
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
     gap: 28px;
+
+    @media (max-width: $bp-sm) {
+      gap: 16px;
+    }
   }
 
   &__card {
@@ -20,6 +24,10 @@
     cursor: default;
     position: relative;
     overflow: hidden;
+
+    @media (max-width: $bp-sm) {
+      padding: 32px 20px;
+    }
 
     &::before {
       content: '';

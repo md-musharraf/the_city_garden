@@ -91,6 +91,19 @@
     gap: 16px;
     justify-content: center;
     flex-wrap: wrap;
+
+    @media (max-width: 480px) {
+      flex-direction: column;
+      width: 100%;
+      max-width: 320px;
+      margin: 0 auto;
+
+      a, .btn-primary, .btn-outline {
+        width: 100%;
+        text-align: center;
+        justify-content: center;
+      }
+    }
   }
 
   &__scroll {

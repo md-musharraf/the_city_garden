@@ -59,6 +59,12 @@
     }
 
     @media (max-width: $bp-md) { right: 0; bottom: -10px; }
+    
+    @media (max-width: 400px) {
+      padding: 10px 14px;
+      right: 10px;
+      bottom: -10px;
+    }
   }
 
   &__badge-num {
@@ -66,6 +72,10 @@
     font-size: 2rem;
     font-weight: 700;
     line-height: 1;
+
+    @media (max-width: 400px) {
+      font-size: 1.5rem;
+    }
   }
 
   &__badge-lbl {
@@ -73,6 +83,11 @@
     font-weight: 600;
     letter-spacing: 1px;
     text-transform: uppercase;
+
+    @media (max-width: 400px) {
+      font-size: 0.6rem;
+      letter-spacing: 0.5px;
+    }
   }
 
   &__text {

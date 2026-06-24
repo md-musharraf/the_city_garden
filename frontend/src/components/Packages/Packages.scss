@@ -37,10 +37,20 @@
       animation: heartbeat 4s infinite alternate ease-in-out;
       box-shadow: $shadow-glow-gold;
 
+      @media (max-width: $bp-md) {
+        transform: none;
+        animation: none;
+        margin: 24px 0;
+      }
+
       &:hover {
         transform: scale(1.05) translateY(-8px);
         animation-play-state: paused;
         box-shadow: $shadow-premium, $shadow-glow-gold;
+
+        @media (max-width: $bp-md) {
+          transform: translateY(-4px);
+        }
       }
 
       .packages__name {

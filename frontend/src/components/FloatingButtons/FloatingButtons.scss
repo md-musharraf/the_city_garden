@@ -86,3 +86,75 @@
   }
 }
 
+// Mobile sticky bottom action bar (overrides floating positions)
+@media (max-width: $bp-sm) {
+  .float-group {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 72px;
+    background: rgba(13, 29, 26, 0.93);
+    backdrop-filter: blur(15px);
+    border-top: 1px solid rgba($gold, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 16px;
+    gap: 12px;
+    z-index: 999;
+    box-shadow: 0 -5px 25px rgba(0, 0, 0, 0.35);
+  }
+
+  .float-wa,
+  .float-stay,
+  .float-book {
+    position: static !important;
+    animation: none !important;
+    transform: none !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+  }
+
+  .float-wa {
+    width: 46px;
+    height: 46px;
+    font-size: 1.4rem;
+    flex-shrink: 0;
+    
+    &:hover {
+      transform: scale(1.05) !important;
+    }
+  }
+
+  .float-stay {
+    width: 46px;
+    height: 46px;
+    font-size: 1.25rem;
+    padding: 0;
+    justify-content: center;
+    border-radius: 50%;
+    flex-shrink: 0;
+
+    .float-stay__text {
+      display: none;
+    }
+
+    &:hover {
+      transform: scale(1.05) !important;
+    }
+  }
+
+  .float-book {
+    flex: 2;
+    height: 46px;
+    border-radius: 8px;
+    justify-content: center;
+    font-size: 0.9rem;
+    padding: 0 16px;
+    
+    &:hover {
+      transform: translateY(-2px) !important;
+    }
+  }
+}

@@ -84,6 +84,10 @@
     padding: 36px 32px;
     box-shadow: $shadow;
 
+    @media (max-width: $bp-sm) {
+      padding: 24px 16px;
+    }
+
     h3 { font-size: 1.4rem; color: $forest; margin-bottom: 6px; }
 
     .form-group {
