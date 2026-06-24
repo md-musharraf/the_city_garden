@@ -7,6 +7,12 @@ import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import StayRoomPopup from "./components/StayRoomPopup/StayRoomPopup";
 
+import Lenis from "lenis";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+gsap.registerPlugin(ScrollTrigger);
+
 const ADMIN_ROUTES = ["/admin", "/admin-login"];
 
 const ScrollToAnchor = () => {
@@ -17,15 +23,22 @@ const ScrollToAnchor = () => {
       const element = document.getElementById(location.hash.slice(1));
 
       if (element) {
-        requestAnimationFrame(() => {
+        // Dynamic smooth anchor glide using Lenis scrollTo
+        if (window.lenis) {
+          window.lenis.scrollTo(element, { offset: -70 });
+        } else {
           element.scrollIntoView({ behavior: "smooth", block: "start" });
-        });
+        }
       }
 
       return;
     }
 
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (window.lenis) {
+      window.lenis.scrollTo(0);
+    } else {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [location.pathname, location.hash]);
 
   return null;
@@ -44,16 +57,34 @@ const App = () => {
   useEffect(() => {
     if (isAdminRoute) return undefined;
 
-    const handleScroll = () => {
-      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
-      if (totalHeight > 0) {
-        const progress = (window.scrollY / totalHeight) * 100;
-        setScrollProgress(progress);
-      }
-    };
+    // Initialize luxury Lenis smooth scroll
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // ease-out-expo
+      smoothWheel: true,
+      wheelMultiplier: 1.0,
+      touchMultiplier: 1.5,
+    });
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    window.lenis = lenis;
+
+    // Synchronize GSAP ScrollTrigger ticks with Lenis scroll
+    lenis.on("scroll", (e) => {
+      ScrollTrigger.update();
+      setScrollProgress(e.progress * 100);
+    });
+
+    const rafTicker = (time) => {
+      lenis.raf(time * 1000);
+    };
+    gsap.ticker.add(rafTicker);
+    gsap.ticker.lagSmoothing(0);
+
+    return () => {
+      lenis.destroy();
+      window.lenis = null;
+      gsap.ticker.remove(rafTicker);
+    };
   }, [isAdminRoute]);
 
   return (

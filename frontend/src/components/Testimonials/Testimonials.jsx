@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import ScrollReveal from "../ScrollReveal";
 import "./Testimonials.scss";
 
@@ -55,10 +56,11 @@ const Testimonials = () => {
         animation="scale-in"
         className="testi"
       >
-        <div
+        <motion.div
           className="testi__track"
           id="testiSlides"
-          style={{ transform: `translateX(-${current * 100}%)` }}
+          animate={{ x: `-${current * 100}%` }}
+          transition={{ type: "spring", stiffness: 90, damping: 20 }}
         >
           {reviews.map(({ stars, text, author, event }) => (
             <div
@@ -73,7 +75,7 @@ const Testimonials = () => {
               </div>
             </div>
           ))}
-        </div>
+        </motion.div>
 
         {/* Timeline progress indicator */}
         <div className="testi__progress">
